@@ -1,0 +1,82 @@
+# Sample Data Quality Rules - Customer Table
+# Author: Chaima Yedes
+
+rules:
+  # Completeness checks
+  - type: null_check
+    column: customer_id
+    severity: critical
+    threshold: 1.0
+
+  - type: null_check
+    column: email
+    severity: high
+    threshold: 0.99
+
+  - type: null_check
+    column: first_name
+    severity: high
+    threshold: 0.95
+
+  - type: null_check
+    column: last_name
+    severity: high
+    threshold: 0.95
+
+  # Uniqueness checks
+  - type: unique_check
+    column: customer_id
+    severity: critical
+    threshold: 1.0
+
+  - type: unique_check
+    column: email
+    severity: high
+    threshold: 0.99
+
+  # Validity - Range checks
+  - type: range_check
+    column: age
+    severity: medium
+    threshold: 0.98
+    params:
+      min_value: 0
+      max_value: 150
+
+  - type: range_check
+    column: credit_score
+    severity: medium
+    threshold: 0.95
+    params:
+      min_value: 300
+      max_value: 850
+
+  # Conformity - Regex checks
+  - type: regex_check
+    column: email
+    severity: high
+    threshold: 0.95
+    params:
+      pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+
+  - type: regex_check
+    column: phone
+    severity: medium
+    threshold: 0.90
+    params:
+      pattern: "^\\+?1?[\\-\\s.]?\\(?\\d{3}\\)?[\\-\\s.]?\\d{3}[\\-\\s.]?\\d{4}$"
+
+  - type: regex_check
+    column: zip_code
+    severity: low
+    threshold: 0.90
+    params:
+      pattern: "^\\d{5}(-\\d{4})?$"
+
+  # Timeliness
+  - type: freshness_check
+    column: last_login
+    severity: medium
+    threshold: 0.80
+    params:
+      max_age_hours: 720  # 30 days

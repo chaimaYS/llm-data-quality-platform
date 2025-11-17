@@ -1,0 +1,31 @@
+# Data Quality Dimension Weights
+# Author: Chaima Yedes
+#
+# Weights control how much each dimension contributes to the overall
+# dataset quality score. They are automatically normalized to sum to 1.0.
+
+dimensions:
+  completeness:
+    weight: 0.20
+    description: "Measures whether all required data is present."
+  uniqueness:
+    weight: 0.15
+    description: "Measures absence of duplicate records or values."
+  validity:
+    weight: 0.15
+    description: "Measures whether data conforms to expected formats and types."
+  consistency:
+    weight: 0.10
+    description: "Measures whether data is consistent across sources."
+  timeliness:
+    weight: 0.10
+    description: "Measures whether data is sufficiently recent."
+  accuracy:
+    weight: 0.10
+    description: "Measures correctness of data values."
+  integrity:
+    weight: 0.10
+    description: "Measures referential integrity between datasets."
+  conformity:
+    weight: 0.10
+    description: "Measures adherence to naming and structural standards."
