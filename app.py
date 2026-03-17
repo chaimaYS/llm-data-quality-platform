@@ -46,7 +46,13 @@ def load_data(uploaded_file) -> pd.DataFrame:
     elif name.endswith((".xlsx", ".xls")):
         return pd.read_excel(uploaded_file)
     elif name.endswith(".json"):
-        return pd.read_json(uploaded_file)
+        import json as _json
+        data = _json.load(uploaded_file)
+        if isinstance(data, list):
+            return pd.DataFrame(data)
+        elif isinstance(data, dict):
+            return pd.json_normalize(data)
+        return pd.DataFrame([data])
     else:
         st.error(f"Unsupported format: {name}")
         return pd.DataFrame()
